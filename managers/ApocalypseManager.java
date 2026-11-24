@@ -16,6 +16,8 @@ public class ApocalypseManager {
     }
 
     public boolean runSimulation(){
+
+        printIntro();
         while(survivors.size() > 1 && daysLeft > 0){
             runDaySequence();
             runNightSequence();
@@ -27,7 +29,6 @@ public class ApocalypseManager {
     public boolean runNightSequence(){
         ArrayList<Zombie> zombies = spawnZombies();
         printBattleIntro(zombies.size());
-        printIntro();
         while(survivorsLiving() && zombies.size() > 0){
             if(survivors.get(survivors.size() - 1).getAmmo() > 0){
                 Person survivor = survivors.get(survivors.size() - 1);
@@ -86,8 +87,8 @@ public class ApocalypseManager {
     }
 
     public void printBattleIntro(int numZombies){
-        System.out.println("As the sun sets, you see shabmling horde approaching. . .");
-        System.out.printf("You see %d zombies at the perimiter. To battle positions!", numZombies);;
+        System.out.println("As the sun sets, you see a shabmling horde approaching. . .");
+        System.out.printf("You see %d zombies at the perimiter. To battle positions!\n", numZombies);;
     }
 
     public void printDaySummary(){
