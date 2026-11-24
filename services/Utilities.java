@@ -5,6 +5,10 @@ import java.util.random.RandomGenerator;
 public class Utilities {
     private static RandomGenerator rand = RandomGenerator.getDefault();
 
+    public static final int DEFAULT_DAYS_LEFT = 10;
+    public static final int MIN_ZOMBIE_COUNT = 15;
+    public static final int MAX_ZOMBIE_COUNT = 45;
+
     public static final int DEFAULT_ZOMBIE_HEALTH = 3;
     public static final int DEFAULT_PERSON_HEALTH = 5;
 

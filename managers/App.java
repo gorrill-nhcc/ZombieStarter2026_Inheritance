@@ -3,6 +3,8 @@ package managers;
 import java.util.random.RandomGenerator;
 import domain.Person;
 import domain.Zombie;
+import services.Utilities;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -12,27 +14,18 @@ public class App {
         String[] names = {"Hank", "Gwen", "Pete", "Michone", 
         "Glen", "Adrienne", "Isabella", "Drew", "Peanut"};
 
-        String[] zombieTypes = {"Grunt", "Runner", "Brute", "Exploder", "Cosmic Horror"};
+        ArrayList<Person> colony = new ArrayList<>();
 
-        int zombieCount = rand.nextInt(15, 50);
-
-        Person [] colony = new Person[names.length];
-        Zombie [] horde =new Zombie[zombieCount];
-
-        int i = 0;
-        for(String n : names){
-            colony[i] = new Person(n);
+        for(int i = 0; i < names.length; i++){
+            int health = Utilities.DEFAULT_PERSON_HEALTH;
+            int food = Utilities.randomInRange(5, 10);
+            int ammo = Utilities.randomInRange(20, 30);
+            Person p = new Person(names[i], health, food, ammo);
+            colony.add(p);
         }
-
-        for(int j = 0; j < names.length; j++){
-            colony[i] = new Person(names[i]);  
-        }
-
-        for(int j = 0; j < horde.length; j++){
-            int choice = rand.nextInt(zombieTypes.length);
-            horde[i] = new Zombie(zombieTypes[choice]);
-        }
-
+        
+        ApocalypseManager manager = new ApocalypseManager(colony);
+        boolean survivors = manager.runSimulation();
 
     }
 }

@@ -19,6 +19,14 @@ public class Person extends Entity {
         this.ammo = ammo;
     }
 
+    public void eat() {
+        if (food > 0) {
+            food--;
+        } else {
+            takeDamage(1);
+        }
+    }
+
     public int getFood() {
         return food;
     }

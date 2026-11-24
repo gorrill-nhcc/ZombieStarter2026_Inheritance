@@ -21,7 +21,7 @@ public class BattleService {
     // if(randomInRange(0, GUN_HIT_PROB) == hitOnVal){
     // its a hit!
     // }
-    public boolean gunBattle(Person p, Zombie z) {
+    public static boolean gunBattle(Person p, Zombie z) {
         // check for hit
         while (p.isLiving() && z.isLiving() && p.getAmmo() > 0) {
             if (Utilities.randomInRange(0, Utilities.GUN_HIT_PROB) == 0) {
@@ -55,7 +55,7 @@ public class BattleService {
      * o If the hit is not critical, it does 1 damage
      * o The person dies if the attack misses
      */
-    public boolean meleeBattle(Person p, Zombie z) {
+    public static boolean meleeBattle(Person p, Zombie z) {
         while (p.isLiving() && z.isLiving()) {
             if (Utilities.randomInRange(0, Utilities.MELEE_HIT_PROB) == 0) {
                 if (Utilities.randomInRange(0, Utilities.MELEE_CRIT_PROB) == 0) {
