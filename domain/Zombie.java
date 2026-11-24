@@ -2,28 +2,18 @@ package domain;
 
 import java.util.Objects;
 
-public class Zombie {
+public class Zombie extends Entity {
 
     private String zombieType;
-    private int health;
 
     public Zombie(String zombieType) {
+        super(zombieType, 2);
         this.zombieType = zombieType;
-        this.health = 2;
     }
 
-    public Zombie(String zombieType, int health, boolean isLiving) {
+    public Zombie(String zombieType, int health) {
+        super(zombieType, health);
         this.zombieType = zombieType;
-        this.health = health;
-    }
-
-    public void takeDamage(int amt) {
-        // have a strat to validate your inputs
-        if (amt < 0) {
-            throw new IllegalArgumentException("Damage values must be positive");
-        } else {
-            health -= amt;
-        }
     }
 
     public String getZombieType() {
@@ -34,21 +24,9 @@ public class Zombie {
         this.zombieType = zombieType;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public boolean isLiving() {
-        return getHealth() > 0;
-    }
-
     @Override
     public String toString() {
-        return "Zombie{zombieType='" + zombieType + "', health=" + health + ", isLiving=" + isLiving() + "}";
+        return "Zombie{zombieType='" + zombieType + "', health=" + getHealth() + ", isLiving=" + isLiving() + "}";
     }
 
     @Override
@@ -60,12 +38,11 @@ public class Zombie {
             return false;
         }
         Zombie other = (Zombie) o;
-        return health == other.health && isLiving() == other.isLiving()
-                && Objects.equals(zombieType, other.zombieType);
+        return super.equals(o) && Objects.equals(zombieType, other.zombieType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(zombieType, health, isLiving());
+        return Objects.hash(super.hashCode(), zombieType);
     }
 }

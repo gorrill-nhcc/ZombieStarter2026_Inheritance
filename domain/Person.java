@@ -2,51 +2,21 @@ package domain;
 
 import java.util.Objects;
 
-public class Person {
+public class Person extends Entity {
 
-    private String name;
-    private int health;
     private int food;
     private int ammo;
 
     public Person(String name) {
-        this.name = name;
-        this.health = 5;
+        super(name, 5);
         this.food = 8;
         this.ammo = 25;
     }
 
     public Person(String name, int health, int food, int ammo) {
-        this.name = name;
-        this.health = health;
+        super(name, health);
         this.food = food;
         this.ammo = ammo;
-    }
-
-    public void takeDamage(int amt){
-        // have a strat to validate your inputs
-        if(amt < 0){
-            throw new IllegalArgumentException("Damage values must be positive");
-        } else {
-            health -= amt;
-        } 
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public int getFood() {
@@ -65,13 +35,9 @@ public class Person {
         this.ammo = ammo;
     }
 
-    public boolean isLiving(){
-        return getHealth() > 0;
-    }
-
     @Override
     public String toString() {
-        return "Person{name='" + name + "', health=" + health + ", food=" + food + ", ammo=" + ammo + "}";
+        return "Person{name='" + getName() + "', health=" + getHealth() + ", food=" + food + ", ammo=" + ammo + "}";
     }
 
     @Override
@@ -83,12 +49,11 @@ public class Person {
             return false;
         }
         Person other = (Person) o;
-        return health == other.health && food == other.food && ammo == other.ammo
-                && Objects.equals(name, other.name);
+        return super.equals(o) && food == other.food && ammo == other.ammo;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, health, food, ammo);
+        return Objects.hash(super.hashCode(), food, ammo);
     }
 }
