@@ -11,8 +11,11 @@ public class App {
 
         RandomGenerator rand = RandomGenerator.getDefault();
 
-        String[] names = {"Hank", "Gwen", "Pete", "Michone", 
-        "Glen", "Adrienne", "Isabella", "Drew", "Peanut"};
+        String[] names = {"Ripley", "Neo", "Furiosa", "Hicks", 
+        "Trinity", "Sarah", "Dutch", "Korben", "Leeloo", "Vasquez", 
+        "Blade", "Deckard", "Maximus", "Logan", "Selene", "Riddick", 
+        "Kaneda", "Imperator", "Morpheus", "T-800", "Star-Lord", 
+        "John", "Leia", "Han", "Rambo"};
 
         ArrayList<Person> colony = new ArrayList<>();
 
@@ -23,7 +26,7 @@ public class App {
             Person p = new Person(names[i], health, food, ammo);
             colony.add(p);
         }
-        
+
         ApocalypseManager manager = new ApocalypseManager(colony);
         boolean survivors = manager.runSimulation();
 
