@@ -1,0 +1,3 @@
+Create a shield bearer class that extends Person
+Shield bearer can deploy shield to protect themselves for 3 rounds of combat or up to 5 damage.
+The shield bearer cannot attack while shielded, but they will heal up to max 1 point / combat tic
