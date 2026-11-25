@@ -1,18 +1,19 @@
 package domain;
 
 public class ShieldBearer extends Person{
+
     private final int DEFAULT_SHIELD_ABILITY_COOLDOWN = 3;
     private int shieldStrength;
     private int shieldTimer;
     private int shieldAbilityCooldown;
     private boolean shieldInUse = false;
 
-
     public ShieldBearer(String name, int health, int food, int ammo, int shieldStrength){
         super(name, health, food, ammo);
         this.shieldStrength = shieldStrength;
     }
 
+    @Override 
     public void combatUpdate(){
         if(shieldInUse){
             heal(1);
@@ -30,12 +31,15 @@ public class ShieldBearer extends Person{
     }
 
     public void useShieldAbility(){
-        // 1. set the shield timer
-        shieldTimer = shieldStrength;
-        // 2. set cooldown
-        shieldAbilityCooldown = DEFAULT_SHIELD_ABILITY_COOLDOWN;
-        // 3. shieldInUse -> true
-        shieldInUse = true;
+        if(shieldAbilityCooldown <= 0){
+            // 1. set the shield timer
+            shieldTimer = shieldStrength;
+            // 3. shieldInUse -> true
+            shieldInUse = true;
+        } else {
+            // in cooldown, don't use shield
+        }
+
     }
 
     @Override 
