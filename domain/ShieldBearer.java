@@ -38,4 +38,13 @@ public class ShieldBearer extends Person{
         shieldInUse = true;
     }
 
+    @Override 
+    public void takeDamage(int amt){
+        if(!shieldInUse){
+            super.takeDamage(amt);
+        } else {
+            //some side effect here
+        }
+    }
+
 }
