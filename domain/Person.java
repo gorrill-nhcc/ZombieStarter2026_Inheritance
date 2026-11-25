@@ -2,8 +2,10 @@ package domain;
 
 import java.util.Objects;
 
-public class Person extends Entity {
+import services.Utilities;
 
+public class Person extends Entity {
+    private int sanityLevel;
     private int food;
     private int ammo;
 
@@ -20,7 +22,9 @@ public class Person extends Entity {
     }
 
     public void combatUpdate(){
-        
+        if(Utilities.randomInRange(3, 10) == 5){
+            sanityLevel--;
+        }
     }
 
     public void eat() {

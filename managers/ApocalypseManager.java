@@ -18,6 +18,7 @@ public class ApocalypseManager {
     public boolean runSimulation(){
 
         printIntro();
+
         while(survivorsLiving() && daysLeft > 0){
             runDaySequence();
             runNightSequence();
@@ -27,22 +28,26 @@ public class ApocalypseManager {
     }
 
     public boolean runNightSequence(){
+
         ArrayList<Zombie> zombies = spawnZombies();
+
         printBattleIntro(zombies.size());
+
         while(survivorsLiving() && zombies.size() > 0){
-            survivors.get(survivors.size() - 1).combatUpdate();
-            zombies.get(zombies.size() - 1).combatUpdate();
-            if(survivors.get(survivors.size() - 1).getAmmo() > 0){
-                Person survivor = survivors.get(survivors.size() - 1);
+
+            // survivors.get(survivors.size() - 1).combatUpdate();
+            // zombies.get(zombies.size() - 1).combatUpdate();
+            Person currentSurvivor = survivors.get(survivors.size() - 1);
+            if(currentSurvivor.getAmmo() > 0){
                 Zombie zombie = zombies.get(zombies.size() - 1);
-                boolean survivorWins = BattleService.gunBattle(survivor, zombie);
+                boolean survivorWins = BattleService.gunBattle(currentSurvivor, zombie);
                 if(survivorWins){
                     zombies.remove(zombies.size() - 1);
                     zombiesKilled++;
-                    System.out.println(survivor.getName() + " killed a zombie!");
+                    System.out.println(currentSurvivor.getName() + " killed a zombie!");
                 } else {
                     survivors.remove(survivors.size() - 1);
-                    System.out.println(survivor.getName() + " was killed by a zombie!");
+                    System.out.println(currentSurvivor.getName() + " was killed by a zombie!");
                 }
 
             } else {

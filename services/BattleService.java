@@ -24,6 +24,8 @@ public class BattleService {
     public static boolean gunBattle(Person p, Zombie z) {
         // check for hit
         while (p.isLiving() && z.isLiving() && p.getAmmo() > 0) {
+            p.combatUpdate();
+            z.combatUpdate();
             if (Utilities.randomInRange(0, Utilities.GUN_HIT_PROB) == 0) {
                 if (Utilities.randomInRange(0, Utilities.GUN_CRIT_PROB) == 0) {
                     // zombie takes damage
@@ -57,6 +59,8 @@ public class BattleService {
      */
     public static boolean meleeBattle(Person p, Zombie z) {
         while (p.isLiving() && z.isLiving()) {
+            p.combatUpdate();
+            z.combatUpdate();
             if (Utilities.randomInRange(0, Utilities.MELEE_HIT_PROB) == 0) {
                 if (Utilities.randomInRange(0, Utilities.MELEE_CRIT_PROB) == 0) {
                     z.takeDamage(z.getHealth());
