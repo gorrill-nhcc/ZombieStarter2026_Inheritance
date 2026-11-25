@@ -19,6 +19,10 @@ public class Person extends Entity {
         this.ammo = ammo;
     }
 
+    public void combatUpdate(){
+        
+    }
+
     public void eat() {
         if (food > 0) {
             food--;

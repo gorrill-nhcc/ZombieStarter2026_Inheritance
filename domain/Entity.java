@@ -6,10 +6,12 @@ public abstract class Entity {
 
     private String name;
     private int health;
+    private final int MAX_HEALTH;
 
     public Entity(String name, int health) {
         this.name = name;
         this.health = health;
+        MAX_HEALTH = health;
     }
 
     /**
@@ -17,9 +19,7 @@ public abstract class Entity {
      * Subclasses should override this to handle cooldown ticks
      * or any other per-round state updates.
      */
-    public void combatUpdate() {
-        // base implementation is a no-op; subclasses override as needed
-    }
+    public abstract void combatUpdate();
 
     public void takeDamage(int amt) {
         // have a strat to validate your inputs
@@ -27,6 +27,16 @@ public abstract class Entity {
             throw new IllegalArgumentException("Damage values must be positive");
         } else {
             health -= amt;
+        }
+    }
+
+    public void heal(int amt){
+        if(amt < 0){
+            throw new IllegalArgumentException("Heal values must be positive");
+        } else if(health + amt <= MAX_HEALTH){
+            health += amt;
+        } else {
+            health = MAX_HEALTH;
         }
     }
 

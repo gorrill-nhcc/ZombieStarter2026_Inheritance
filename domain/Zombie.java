@@ -16,6 +16,10 @@ public class Zombie extends Entity {
         this.zombieType = zombieType;
     }
 
+    public void combatUpdate(){
+        
+    }
+
     public String getZombieType() {
         return zombieType;
     }

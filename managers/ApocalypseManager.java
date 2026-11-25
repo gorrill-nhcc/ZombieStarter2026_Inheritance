@@ -18,7 +18,7 @@ public class ApocalypseManager {
     public boolean runSimulation(){
 
         printIntro();
-        while(survivors.size() > 1 && daysLeft > 0){
+        while(survivorsLiving() && daysLeft > 0){
             runDaySequence();
             runNightSequence();
         }
@@ -30,6 +30,8 @@ public class ApocalypseManager {
         ArrayList<Zombie> zombies = spawnZombies();
         printBattleIntro(zombies.size());
         while(survivorsLiving() && zombies.size() > 0){
+            survivors.get(survivors.size() - 1).combatUpdate();
+            zombies.get(zombies.size() - 1).combatUpdate();
             if(survivors.get(survivors.size() - 1).getAmmo() > 0){
                 Person survivor = survivors.get(survivors.size() - 1);
                 Zombie zombie = zombies.get(zombies.size() - 1);
@@ -43,6 +45,8 @@ public class ApocalypseManager {
                     System.out.println(survivor.getName() + " was killed by a zombie!");
                 }
 
+            } else {
+                //do melee battle
             }
             totalZombiesKilled += zombiesKilled;
             zombiesKilled = 0;
@@ -53,7 +57,7 @@ public class ApocalypseManager {
 
     public void runDaySequence(){
         feedSurvivors();
-        removeDeadSurvivors();
+        removeDeadSurvivors(); // people my die from starvation
         daysLeft--;
     }
 
@@ -64,6 +68,9 @@ public class ApocalypseManager {
     }
 
     public void removeDeadSurvivors(){
+        // removeIf accepts a predicate and removes all matches
+        // this avoids any ConcurrentModificationExceptions risk. 
+        // CMEs occur when a list item is removed while iterating
         survivors.removeIf(survivor -> !survivor.isLiving());
     }
 
